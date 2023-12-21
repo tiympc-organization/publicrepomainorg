@@ -27,7 +27,12 @@ jobs:
 
     # Skip any PR created by dependabot to avoid permission issues:
     if: (github.actor != 'dependabot[bot]')
-
+    permissions:
+      # required for all workflows
+      security-events: write
+      # for workflows in private repos
+      actions: read
+      contents: read
     steps:
       - uses: actions/checkout@v3
       - run: semgrep scan --sarif > semgrep.sarif
